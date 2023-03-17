@@ -8,48 +8,57 @@ const SubMainForm = () => {
     userPassword: " ",
   });
 
+  const [allFormData, setNewFormDatas] = useState([]);
+
   const OnFName = (event) => {
-    event.preventDefault();
+ 
     // console.log(event.target.value)
     const name = event.target.name;
     const value = event.target.value;
-   setNewFormData((preValue) =>{
-    if(name === "userFName"){
-     return{
-      userFName: value,
-      userLName: preValue.userLName,
-      userEmailId: preValue.userEmailId,
-      userPassword:preValue.userPassword,
-     }
-    } else if(name === "userLName"){
-      return{
-       userFName: preValue.userFName,
-       userLName: value,
-       userEmailId: preValue.userEmailId,
-       userPassword:preValue.userPassword,
+    setNewFormData((preValue) => {
+      if (name === "userFName") {
+        return {
+          userFName: value,
+          userLName: preValue.userLName,
+          userEmailId: preValue.userEmailId,
+          userPassword: preValue.userPassword,
+        };
+      } else if (name === "userLName") {
+        return {
+          userFName: preValue.userFName,
+          userLName: value,
+          userEmailId: preValue.userEmailId,
+          userPassword: preValue.userPassword,
+        };
+      } else if (name === "userEmailId") {
+        return {
+          userFName: preValue.userFName,
+          userLName: preValue.userLName,
+          userEmailId: value,
+          userPassword: preValue.userPassword,
+        };
+      } else if (name === "userPassword") {
+        return {
+          userFName: preValue.userFName,
+          userLName: preValue.userLName,
+          userEmailId: preValue.userEmailId,
+          userPassword: value,
+        };
       }
-     } else if(name === "userEmailId"){
-      return{
-       userFName: preValue.userFName,
-       userLName: preValue.userLName,
-       userEmailId: value,
-       userPassword:preValue.userPassword,
-      }
-     }else if(name === "userPassword"){
-      return{
-       userFName: preValue.userFName,
-       userLName: preValue.userLName,
-       userEmailId: preValue.userEmailId,
-       userPassword:value,
-      }
-     }
-   })
+    });
   };
 
-  const OnSubmit = ( event) =>{
-    event.preventDefault()
-    
-  }
+  const OnSubmit = (event) => {
+    event.preventDefault();
+    const formDataList = {
+      userFName: formData.userFName,
+      userLName: formData.userLName,
+      userEmailId:formData.userEmailId,
+      userPassword: formData.userPassword,
+    };
+      setNewFormDatas({...allFormData , formDataList})
+      setNewFormData("")
+  };
 
   return (
     <>
